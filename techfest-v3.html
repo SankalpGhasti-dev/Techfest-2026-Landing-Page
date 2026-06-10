@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techfest 2026 — IIT Bombay</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --r:#c8001a;--rb:#ff2040;--rd:rgba(200,0,26,.12);--rg:rgba(200,0,26,.45);
+  --g:#c8941a;--gb:#f0b429;--gd:rgba(200,148,26,.1);--gg:rgba(200,148,26,.45);
+  --bg:#07080d;--bg2:#0c0e16;--bg3:#11141f;--bw:rgba(255,255,255,.07);
+  --t:#e8ecf8;--tm:#9baac8;--td:#4a5878;--br:rgba(200,0,26,.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:'Sora',sans-serif;overflow-x:hidden;cursor:none}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--r)}
+
+/* CURSOR */
+#CU,#CUR{position:fixed;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+#CU{width:8px;height:8px;background:var(--rb);box-shadow:0 0 8px var(--rg)}
+#CUR{width:32px;height:32px;border:1px solid rgba(200,148,26,.6);transition:width .18s,height .18s,border-color .18s}
+
+/* TOP BAR */
+#topbar{background:var(--r);height:34px;display:flex;align-items:center;justify-content:center;gap:1.5rem;font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:2px;color:#fff;text-transform:uppercase;position:relative;overflow:hidden;z-index:999}
+#topbar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:tbsh 3s ease infinite}
+@keyframes tbsh{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+#topbar a{color:var(--gb);text-decoration:none;border-bottom:1px solid rgba(240,180,41,.4)}
+#topbar a:hover{border-color:var(--gb)}
+
+/* NAV */
+nav{position:fixed;top:34px;left:0;right:0;z-index:1000;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;background:rgba(7,8,13,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--br);transform:translateY(calc(-34px - 66px));transition:transform .7s cubic-bezier(.77,0,.175,1)}
+nav.on{transform:translateY(0)}
+.nl{display:flex;align-items:center;text-decoration:none}
+.nl-logo{height:38px;filter:drop-shadow(0 0 10px var(--rg))}
+.nm{display:flex;gap:2rem;list-style:none}
+.nm a{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--td);text-decoration:none;position:relative;transition:color .2s}
+.nm a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--g);transform:scaleX(0);transition:transform .2s;transform-origin:left}
+.nm a:hover{color:#fff}.nm a:hover::after{transform:scaleX(1)}
+.nbtns{display:flex;gap:.7rem}
+.nb1{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:3px;color:#fff;background:var(--r);padding:8px 24px;text-decoration:none;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:box-shadow .2s;position:relative;overflow:hidden}
+.nb1::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .4s}
+.nb1:hover{box-shadow:0 0 28px var(--rg)}.nb1:hover::before{transform:translateX(100%)}
+.nb2{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:3px;color:var(--g);border:1px solid rgba(200,148,26,.4);padding:8px 24px;text-decoration:none;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:all .2s}
+.nb2:hover{background:var(--gd);box-shadow:0 0 18px var(--gg)}
+
+/* INTRO */
+#intro{position:fixed;inset:0;z-index:10000;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.ibar-w{position:absolute;inset:0}
+.ibar{position:absolute;left:0;right:0;background:#0c0002;transform:scaleY(0);transform-origin:center}
+.ibar:nth-child(1){top:0;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .00s forwards}
+.ibar:nth-child(2){top:12.5%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .04s forwards}
+.ibar:nth-child(3){top:25%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .08s forwards}
+.ibar:nth-child(4){top:37.5%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .06s forwards}
+.ibar:nth-child(5){top:50%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .10s forwards}
+.ibar:nth-child(6){top:62.5%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .03s forwards}
+.ibar:nth-child(7){top:75%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .12s forwards}
+.ibar:nth-child(8){top:87.5%;height:12.5%;animation:bi .4s cubic-bezier(.77,0,.175,1) .02s forwards}
+@keyframes bi{to{transform:scaleY(1)}}
+.isweep{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--rb),transparent);top:0;animation:isw 1s ease .25s;opacity:0;z-index:2}
+@keyframes isw{0%{top:0;opacity:1}100%{top:100%;opacity:.2}}
+.ihl-w{position:absolute;inset:0;pointer-events:none}
+.ihl{position:absolute;height:1px;width:0;animation:ihlg 1.5s ease .15s forwards}
+.ihl.l{left:0;background:linear-gradient(90deg,var(--r),transparent)}
+.ihl.r{right:0;background:linear-gradient(270deg,var(--r),transparent)}
+.ihl:nth-child(1){top:25%}.ihl:nth-child(2){top:50%;background:linear-gradient(90deg,var(--g),transparent)}.ihl:nth-child(3){top:75%}
+.ihl:nth-child(4){top:38%;animation-delay:.28s}.ihl:nth-child(5){top:62%;background:linear-gradient(270deg,var(--g),transparent);animation-delay:.22s}
+@keyframes ihlg{to{width:44%}}
+.iscan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.15) 3px,rgba(0,0,0,.15) 4px);pointer-events:none;z-index:1}
+.ivig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.85) 100%);z-index:1;pointer-events:none}
+.ictr{position:relative;z-index:5;text-align:center;opacity:0;animation:icf .6s ease .85s forwards;display:flex;flex-direction:column;align-items:center}
+@keyframes icf{to{opacity:1}}
+.i-logo{width:min(580px,85vw);animation:logop 2.5s ease-in-out infinite 1s}
+@keyframes logop{0%,100%{filter:drop-shadow(0 0 25px var(--rg)) drop-shadow(0 0 50px rgba(200,0,26,.2))}50%{filter:drop-shadow(0 0 55px var(--rg)) drop-shadow(0 0 110px rgba(200,0,26,.4)) drop-shadow(0 0 15px rgba(240,180,41,.3))}}
+.i-sub{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:5px;color:var(--g);margin-top:1.2rem;text-transform:uppercase}
+.i-sub2{font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:4px;color:var(--td);margin-top:.4rem}
+.iprog{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);width:220px;z-index:5}
+.iprog-lbl{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:.52rem;color:var(--td);letter-spacing:2px;margin-bottom:5px}
+.iprog-bar{height:1px;background:rgba(255,255,255,.07);overflow:hidden}
+.iprog-fill{height:100%;width:0;background:var(--r);box-shadow:0 0 8px var(--rg);animation:ipf 2.1s ease .9s forwards}
+@keyframes ipf{to{width:100%}}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;padding-top:100px;overflow:hidden;gap:2rem}
+#hcanv{position:absolute;inset:0;width:100%;height:100%}
+.h-rx{position:absolute;top:50%;right:-5%;transform:translateY(-50%);width:680px;height:680px;pointer-events:none}
+.hrr{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(200,0,26,.05);animation:rspin 28s linear infinite}
+.hrr:nth-child(2){inset:70px;border-color:rgba(200,148,26,.07);animation-duration:20s;animation-direction:reverse}
+.hrr:nth-child(3){inset:140px;animation-duration:40s}
+.hcore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(200,0,26,.18) 0%,rgba(200,148,26,.05) 45%,transparent 70%);animation:rpulse 3.5s ease-in-out infinite;box-shadow:0 0 90px rgba(200,0,26,.22)}
+@keyframes rspin{to{transform:rotate(360deg)}}
+@keyframes rpulse{0%,100%{box-shadow:0 0 90px rgba(200,0,26,.22)}50%{box-shadow:0 0 150px rgba(200,0,26,.45),0 0 260px rgba(200,0,26,.18)}}
+#hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,transparent 12%,transparent 80%,var(--bg) 100%);pointer-events:none}
+.hcont{position:relative;z-index:2}
+.h-eyebrow{font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:5px;color:var(--g);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;text-transform:uppercase}
+.h-eyebrow::before{content:'';width:38px;height:1px;background:linear-gradient(to right,transparent,var(--g))}
+.h-hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,5.5vw,5.8rem);line-height:.92;letter-spacing:3px;margin-bottom:1.5rem}
+.h-hl .r{color:var(--r);text-shadow:0 0 40px var(--rg),0 0 80px rgba(200,0,26,.15);display:block}
+.h-hl .o{-webkit-text-stroke:1px rgba(255,255,255,.18);color:transparent;display:block}
+.h-desc{font-size:.95rem;color:var(--tm);max-width:460px;line-height:1.85;margin-bottom:2.5rem}
+.h-desc strong{color:var(--gb)}
+.h-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-r{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:#fff;background:var(--r);padding:13px 36px;text-decoration:none;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);position:relative;overflow:hidden;box-shadow:0 0 20px var(--rg);transition:box-shadow .2s,transform .2s}
+.btn-r::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .4s}
+.btn-r:hover{box-shadow:0 0 45px var(--rg);transform:translateY(-2px)}.btn-r:hover::after{transform:translateX(100%)}
+.btn-g{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;color:var(--g);border:1px solid rgba(200,148,26,.4);padding:13px 36px;text-decoration:none;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s}
+.btn-g:hover{background:var(--gd);box-shadow:0 0 25px var(--gg);transform:translateY(-2px)}
+.h-media{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.h-logo-img{width:100%;max-width:540px;animation:logop 3s ease-in-out infinite}
+.h-scroll{position:absolute;left:50%;bottom:1.8rem;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:3px;color:var(--td)}
+.h-scroll::after{content:'';width:1px;height:0;background:linear-gradient(to bottom,var(--r),transparent);animation:scrl 2s ease infinite}
+@keyframes scrl{0%{height:0;opacity:0}60%{height:55px;opacity:1}100%{height:0;opacity:0}}
+
+/* STATS */
+#stats{background:var(--bg2);border-top:1px solid var(--br);border-bottom:1px solid rgba(200,148,26,.1)}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto}
+.si{padding:2.25rem 2rem;text-align:center;border-right:1px solid var(--br);position:relative;overflow:hidden;transition:background .3s}
+.si:hover{background:rgba(200,0,26,.04)}.si:last-child{border-right:none}
+.si::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--r),transparent);transform:scaleX(0);transition:transform .5s}
+.si:hover::before{transform:scaleX(1)}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:2px;color:var(--r);text-shadow:0 0 18px var(--rg);display:block}
+.sl{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:3px;color:var(--td);text-transform:uppercase;display:block;margin-top:4px}
+
+/* SECTION UTILS */
+.eyb{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--r);letter-spacing:5px;text-transform:uppercase;margin-bottom:.85rem;display:flex;align-items:center;gap:10px}
+.eyb::before{content:'';width:18px;height:1px;background:var(--r)}
+.eyb.g{color:var(--g)}.eyb.g::before{background:var(--g)}.eyb.c{justify-content:center}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.3rem,3.8vw,3.5rem);letter-spacing:3px;color:#fff;line-height:1.05;margin-bottom:1rem}
+.st em{color:var(--r);font-style:normal}
+.mw{max-width:1200px;margin:0 auto}
+section{padding:100px 4rem}
+
+/* ABOUT */
+#about{position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,0,26,.04),transparent 70%);pointer-events:none}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.at p{color:var(--tm);line-height:1.9;margin-bottom:.9rem;font-size:.95rem}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.5rem}
+.pill{font-family:'Share Tech Mono',monospace;font-size:.57rem;color:var(--g);border:1px solid rgba(200,148,26,.22);padding:5px 12px;background:var(--gd);letter-spacing:1px;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);transition:border-color .2s,box-shadow .2s}
+.pill:hover{border-color:var(--g);box-shadow:0 0 8px var(--gg)}
+.av{display:flex;align-items:center;justify-content:center;height:400px}
+
+/* FULLSCREEN PANELS */
+.fp{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
+.fp-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.2) saturate(.5);transition:transform 7s ease,filter .6s}
+.fp:hover .fp-bg{transform:scale(1.05);filter:brightness(.28) saturate(.7)}
+.fp::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,13,.97) 30%,rgba(7,8,13,.6) 58%,transparent 80%);pointer-events:none}
+.fp::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--r),transparent);opacity:.65}
+.fp.flip::after{background:linear-gradient(270deg,rgba(7,8,13,.97) 30%,rgba(7,8,13,.6) 58%,transparent 80%)}
+.fp.flip::before{left:auto;right:0}
+.fp-c{position:relative;z-index:2;padding:0 4rem;max-width:640px}
+.fp.flip .fp-c{margin-left:auto}
+.fp-tag{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--r);letter-spacing:5px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.fp-tag::before{content:'';width:14px;height:1px;background:var(--r)}
+.fp h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);letter-spacing:4px;color:#fff;line-height:.92;margin-bottom:1rem}
+.fp h2 em{color:var(--r);font-style:normal}
+.fp p{color:var(--tm);line-height:1.85;font-size:.95rem;margin-bottom:2rem;max-width:500px}
+
+/* EVENTS */
+#events{background:var(--bg2)}
+.eh{margin-bottom:3.5rem}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br)}
+.ec{background:var(--bg);padding:2.25rem 1.75rem;position:relative;overflow:hidden;transition:background .3s;opacity:0;transform:translateY(22px)}
+.ec.on{animation:rise .5s ease forwards}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+.ec:hover{background:var(--bg3)}
+.ec::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--r);transition:height .4s}.ec:hover::before{height:100%}
+.ec-n{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;letter-spacing:2px;color:rgba(200,0,26,.07);line-height:1;margin-bottom:.4rem;transition:color .3s}.ec:hover .ec-n{color:rgba(200,0,26,.15)}
+.ec-i{width:40px;height:40px;background:var(--rd);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.ec-i svg{width:18px;height:18px;stroke:var(--r);fill:none;stroke-width:1.5}
+.ec h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:#fff;margin-bottom:.6rem}
+.ec p{color:var(--td);line-height:1.68;font-size:.88rem}
+
+/* HIGHLIGHTS */
+#highlights{padding:100px 4rem}
+.hl-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.hcard{background:var(--bg3);border:1px solid var(--bw);overflow:hidden;position:relative;transition:border-color .3s,transform .3s;opacity:0;transform:translateY(22px)}
+.hcard.on{animation:rise .5s ease forwards}
+.hcard:hover{border-color:rgba(200,0,26,.3);transform:translateY(-4px)}
+.hcard-img{height:190px;overflow:hidden;position:relative}
+.hcard-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.55) brightness(.7);transition:transform .5s,filter .5s}
+.hcard:hover .hcard-img img{transform:scale(1.06);filter:saturate(1) brightness(.88)}
+.hcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg3) 0%,transparent 55%)}
+.hcard-tag{position:absolute;top:.9rem;left:.9rem;font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--r);border:1px solid var(--br);padding:4px 9px;background:rgba(7,8,13,.85);letter-spacing:2px;z-index:1}
+.hcard-body{padding:1.4rem}
+.hcard-date{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:var(--g);letter-spacing:2px;margin-bottom:.4rem}
+.hcard-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:#fff;margin-bottom:.45rem}
+.hcard-body p{color:var(--td);font-size:.85rem;line-height:1.65;margin-bottom:1.1rem}
+.hcard-link{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--r);letter-spacing:2px;text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:color .2s}
+.hcard-link:hover{color:var(--rb)}.hcard-link::after{content:'→';transition:transform .2s}.hcard-link:hover::after{transform:translateX(4px)}
+
+/* TECHNOHOLIX */
+#tech{padding:120px 4rem;position:relative;overflow:hidden;text-align:center}
+#tech::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,0,26,.09) 0%,transparent 65%);pointer-events:none}
+#tech::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(200,0,26,.015) 2px,rgba(200,0,26,.015) 3px);pointer-events:none}
+.tc{max-width:720px;margin:0 auto;position:relative;z-index:1}
+.tc .st{font-size:clamp(3rem,7vw,6.5rem);text-shadow:0 0 40px var(--rg)}
+.tc p{color:var(--tm);font-size:1rem;line-height:1.85;margin-bottom:2.5rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:2.5rem}
+.chip{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--r);border:1px solid var(--br);padding:7px 18px;background:var(--rd);letter-spacing:2px;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:box-shadow .2s}
+.chip:hover{box-shadow:0 0 12px var(--rg)}
+
+/* WORKSHOPS */
+#workshops{background:var(--bg2)}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,148,26,.1);border:1px solid rgba(200,148,26,.1);margin-top:3.5rem}
+.wi{background:var(--bg);padding:1.7rem 2.2rem;display:flex;align-items:flex-start;gap:1.4rem;transition:background .3s;position:relative;overflow:hidden;opacity:0;transform:translateX(-16px)}
+.wi.on{animation:slr .45s ease forwards}
+@keyframes slr{to{opacity:1;transform:translateX(0)}}
+.wi:hover{background:var(--bg3)}
+.wi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--g),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s}.wi:hover::after{transform:scaleX(1)}
+.wn{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:rgba(200,148,26,.15);line-height:1;min-width:44px;transition:color .3s}.wi:hover .wn{color:rgba(200,148,26,.4)}
+.wb h4{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#fff;margin-bottom:.28rem}
+.wb p{color:var(--td);font-size:.86rem;line-height:1.6}
+
+/* GALLERY */
+#gallery{padding:100px 4rem}
+.gg{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:248px 198px;gap:5px;margin-top:2.5rem}
+.gi{overflow:hidden;position:relative;cursor:pointer;opacity:0;transform:scale(.96)}.gi.on{animation:scin .6s ease forwards}
+@keyframes scin{to{opacity:1;transform:scale(1)}}
+.gi:nth-child(1){grid-column:span 5}.gi:nth-child(2){grid-column:span 4}.gi:nth-child(3){grid-column:span 3}
+.gi:nth-child(4){grid-column:span 3}.gi:nth-child(5){grid-column:span 5}.gi:nth-child(6){grid-column:span 4}
+.gimg{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .4s;filter:saturate(.45) brightness(.6)}
+.gi:hover .gimg{transform:scale(1.07);filter:saturate(1) brightness(.88)}
+.gover{position:absolute;inset:0;background:linear-gradient(to top,rgba(200,0,26,.7),transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:.85rem}
+.gi:hover .gover{opacity:1}.gover span{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:#fff;letter-spacing:2px}
+.gi::before{content:'';position:absolute;top:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--r),transparent);z-index:2;opacity:0}
+.gi:hover::before{opacity:1;animation:scanl 1s linear infinite}
+@keyframes scanl{from{top:-4px}to{top:104%}}
+
+/* SPONSORS */
+#sponsors{padding:70px 4rem;background:var(--bg2);border-top:1px solid var(--bw)}
+.sp-tier{margin-bottom:2.5rem}
+.sp-label{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:4px;color:var(--g);text-transform:uppercase;margin-bottom:1.1rem;display:flex;align-items:center;gap:10px}
+.sp-label::before{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--g),transparent)}
+.sp-label::after{content:'';flex:1;height:1px;background:linear-gradient(to left,var(--g),transparent)}
+.sp-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem}
+.sp-logo{background:rgba(255,255,255,.03);border:1px solid var(--bw);padding:.9rem 2.2rem;display:flex;align-items:center;justify-content:center;min-width:130px;transition:border-color .2s,box-shadow .2s;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--td)}
+.sp-logo:hover{border-color:rgba(200,148,26,.3);color:var(--g);box-shadow:0 0 14px var(--gg)}
+
+/* FAQ */
+#faq{padding:100px 4rem}
+.faq-w{max-width:740px;margin:0 auto}
+.faq-h{text-align:center;margin-bottom:3rem}
+.faq-item{border-bottom:1px solid var(--bw)}
+.faq-q{padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:1rem;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;letter-spacing:.5px;color:var(--t);transition:color .2s}
+.faq-q:hover{color:var(--r)}
+.faq-ico{width:22px;height:22px;min-width:22px;border:1px solid var(--br);display:flex;align-items:center;justify-content:center;position:relative;transition:border-color .2s;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.faq-ico::before,.faq-ico::after{content:'';position:absolute;background:var(--r);transition:transform .3s,opacity .3s}
+.faq-ico::before{width:9px;height:1px}.faq-ico::after{width:1px;height:9px}
+.faq-item.open .faq-ico{border-color:var(--r)}.faq-item.open .faq-ico::after{transform:scaleY(0);opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:180px;padding-bottom:1.4rem}
+.faq-a p{color:var(--tm);line-height:1.85;font-size:.9rem}
+
+/* CONTACT */
+#contact{padding:100px 4rem 0;background:var(--bg3);border-top:1px solid var(--br)}
+.cg{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;padding-bottom:80px}
+.cinfo h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#fff;margin-bottom:1rem}
+.cinfo p{color:var(--tm);line-height:1.8;margin-bottom:2rem}
+.crow{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.85rem}
+.cic{width:32px;height:32px;min-width:32px;background:var(--rd);border:1px solid var(--br);display:flex;align-items:center;justify-content:center}
+.cic svg{width:13px;height:13px;stroke:var(--r);fill:none;stroke-width:1.5}
+.crow span{color:var(--tm);font-size:.9rem;padding-top:5px}
+.cf{display:flex;flex-direction:column;gap:1rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-family:'Share Tech Mono',monospace;font-size:.56rem;color:var(--r);letter-spacing:3px;text-transform:uppercase}
+.fg input,.fg textarea{background:rgba(255,255,255,.022);border:1px solid var(--br);color:var(--t);padding:12px 14px;font-family:'Sora',sans-serif;font-size:.88rem;outline:none;resize:none;transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg textarea:focus{border-color:var(--r);box-shadow:0 0 12px rgba(200,0,26,.1)}
+.fbar{border-top:1px solid var(--br);padding:1.8rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fbar p{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--td);letter-spacing:1px}
+.fbar p span{color:var(--r)}
+.soc{display:flex;gap:6px}
+.soc a{width:30px;height:30px;border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--td);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:.56rem;transition:all .2s}
+.soc a:hover{border-color:var(--r);color:var(--r);box-shadow:0 0 8px var(--rg)}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  nav{padding:0 1.5rem}.nm{display:none}
+  #hero{grid-template-columns:1fr;padding:4.5rem 1.5rem 3.5rem}.h-media{display:none}
+  section{padding:80px 1.5rem}
+  #tech,#faq,#gallery,#sponsors,#contact{padding-left:1.5rem;padding-right:1.5rem}
+  .ag{grid-template-columns:1fr}.av{display:none}
+  .sg{grid-template-columns:1fr 1fr}.si{border-right:none;border-bottom:1px solid var(--br)}
+  .egrid{grid-template-columns:1fr 1fr}.hl-rail{grid-template-columns:1fr}
+  .wg{grid-template-columns:1fr}.gg{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gi:nth-child(n){grid-column:span 1}.gi:nth-child(1){grid-column:span 2}
+  .fp-c{padding:0 1.5rem}.fp::after,.fp.flip::after{background:rgba(7,8,13,.9)}
+  .cg{grid-template-columns:1fr;gap:2.5rem}
+}
+@media(max-width:600px){
+  .egrid{grid-template-columns:1fr}.fr{grid-template-columns:1fr}
+  .gg{grid-template-columns:1fr}.gi:nth-child(1){grid-column:span 1}
+}
+</style>
+</head>
+<body>
+<div id="CU"></div><div id="CUR"></div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="ibar-w"><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div><div class="ibar"></div></div>
+  <div class="ihl-w"><div class="ihl l"></div><div class="ihl l"></div><div class="ihl l"></div><div class="ihl r"></div><div class="ihl r"></div></div>
+  <div class="isweep"></div><div class="iscan"></div><div class="ivig"></div>
+  <div class="ictr">
+    <img class="i-logo" src="./techfest-logo.png" alt="Techfest 2026">
+    <div class="i-sub">IIT Bombay &nbsp;·&nbsp; Asia's Largest Tech Festival</div>
+    <div class="i-sub2">Upgrade &nbsp;·&nbsp; Innovate &nbsp;·&nbsp; Dominate</div>
+  </div>
+  <div class="iprog">
+    <div class="iprog-lbl"><span>INITIALIZING</span><span>SYSTEM</span></div>
+    <div class="iprog-bar"><div class="iprog-fill"></div></div>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <span>⚡ Registrations Now Open — Early Bird Ends Dec 1</span>
+  <a href="#contact">Register Now →</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nl" href="#hero">
+    <img class="nl-logo" src="./techfest-logo.png" alt="Techfest 2026">
+  </a>
+  <ul class="nm">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#workshops">Workshops</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nbtns">
+    <a class="nb2" href="#about">Explore</a>
+    <a class="nb1" href="#contact">Register</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hcanv"></canvas>
+  <div class="h-rx"><div class="hrr"></div><div class="hrr"></div><div class="hrr"></div><div class="hcore"></div></div>
+  <div class="hcont">
+    <p class="h-eyebrow">December 22–24, 2026 · IIT Bombay · 30th Edition</p>
+    <h1 class="h-hl">
+      <span class="o">ASIA'S LARGEST</span>
+      <span class="r">TECH FESTIVAL</span>
+    </h1>
+    <p class="h-desc">Where <strong>engineering meets audacity.</strong> Three days. 1,80,000 minds. The future is not predicted — it's engineered here.</p>
+    <div class="h-btns">
+      <a href="#contact" class="btn-r">Register Now</a>
+      <a href="#events" class="btn-g">Explore Events</a>
+    </div>
+  </div>
+  <div class="h-media">
+    <img class="h-logo-img" src="./techfest-logo.png" alt="Techfest 2026">
+  </div>
+  <div class="h-scroll">SCROLL DOWN</div>
+</section>
+
+<!-- STATS -->
+<div id="stats"><div class="sg">
+  <div class="si"><span class="sn">1.8L+</span><span class="sl">Annual Footfall</span></div>
+  <div class="si"><span class="sn">2500+</span><span class="sl">Indian Colleges</span></div>
+  <div class="si"><span class="sn">500+</span><span class="sl">Intl. Colleges</span></div>
+  <div class="si"><span class="sn">30th</span><span class="sl">Edition · Est. 1997</span></div>
+</div></div>
+
+<!-- ABOUT -->
+<section id="about"><div class="mw"><div class="ag">
+  <div class="at">
+    <p class="eyb">System.init(about)</p>
+    <h2 class="st">Engineering<br><em>The Future</em></h2>
+    <p>Techfest is the annual science and technology festival of IIT Bombay — Asia's Largest Science & Technology Festival, powered entirely by students and global sponsorships.</p>
+    <p>Under UNESCO and UNICEF patronage, Techfest brings together the world's brightest minds across robotics, AI, space tech, cybersecurity, and beyond.</p>
+    <div class="pills">
+      <span class="pill">Robotics</span><span class="pill">AI / ML</span><span class="pill">Cybersecurity</span>
+      <span class="pill">Space Tech</span><span class="pill">Drone Racing</span><span class="pill">Blockchain</span>
+      <span class="pill">UNESCO</span><span class="pill">UNICEF</span>
+    </div>
+  </div>
+  <div class="av"><canvas id="sc2" width="320" height="360"></canvas></div>
+</div></div></section>
+
+<!-- FULLSCREEN PANELS -->
+<div class="fp">
+  <div class="fp-bg" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=80')"></div>
+  <div class="fp-c">
+    <p class="fp-tag">Flagship Event</p>
+    <h2>INTERNATIONAL<br><em>ROBOWARS</em></h2>
+    <p>Steel meets sparks. Battle-hardened bots from 40+ countries clash in the world's most intense robot combat arena. Multi-weight. Multi-kilo. Millions at stake.</p>
+    <a href="#contact" class="btn-r">Register Your Bot</a>
+  </div>
+</div>
+<div class="fp flip">
+  <div class="fp-bg" style="background-image:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1800&q=80')"></div>
+  <div class="fp-c">
+    <p class="fp-tag">Competition</p>
+    <h2>36-HOUR<br><em>HACKATHON</em></h2>
+    <p>Real problems. Real code. Build under pressure while top engineers from Google, Microsoft and ISRO watch. The nation's most high-stakes hack.</p>
+    <a href="#contact" class="btn-r">Join the Hack</a>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<section id="events"><div class="mw">
+  <div class="eh"><p class="eyb">System.load(events)</p><h2 class="st">Core <em>Segments</em></h2></div>
+  <div class="egrid">
+    <div class="ec"><div class="ec-n">01</div><div class="ec-i"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>International Robowars</h3><p>Combat robots from 40+ countries. Multi-weight. Maximum carnage.</p></div>
+    <div class="ec"><div class="ec-n">02</div><div class="ec-i"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="18" cy="6" r="4"/></svg></div><h3>Drone Racing League</h3><p>FPV pilots through insane 3D courses. International-caliber racing.</p></div>
+    <div class="ec"><div class="ec-n">03</div><div class="ec-i"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h3>Hackathons & Coding</h3><p>36-hour builds. AI battles. Real code, massive prizes.</p></div>
+    <div class="ec"><div class="ec-n">04</div><div class="ec-i"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div><h3>Tech Exhibitions</h3><p>Humanoids, defence tech, space systems. India's most advanced expo.</p></div>
+    <div class="ec"><div class="ec-n">05</div><div class="ec-i"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Esports & Gaming</h3><p>Competitive gaming, VR zones, spectator arenas, cash prizes.</p></div>
+    <div class="ec"><div class="ec-n">06</div><div class="ec-i"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Keynote Lectures</h3><p>Nobel laureates, ISRO chiefs, global founders. Asia's best stage.</p></div>
+  </div>
+</div></section>
+
+<!-- HIGHLIGHTS -->
+<section id="highlights"><div class="mw">
+  <p class="eyb">System.load(highlights)</p>
+  <h2 class="st">Featured <em>Highlights</em></h2>
+  <div class="hl-rail">
+    <div class="hcard"><div class="hcard-img"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt=""><div class="hcard-tag">ROBOTICS</div></div><div class="hcard-body"><div class="hcard-date">DEC 22, 2026</div><h3>Robowars Championship</h3><p>40+ countries, multiple weight categories, pure mechanical warfare.</p><a class="hcard-link" href="#contact">Register Team</a></div></div>
+    <div class="hcard"><div class="hcard-img"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt=""><div class="hcard-tag">KEYNOTE</div></div><div class="hcard-body"><div class="hcard-date">DEC 23, 2026</div><h3>Global Tech Summit</h3><p>Nobel laureates, ISRO heads and Silicon Valley founders on stage.</p><a class="hcard-link" href="#contact">Reserve Seat</a></div></div>
+    <div class="hcard"><div class="hcard-img"><img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=600&q=80" alt=""><div class="hcard-tag">NIGHT EVENT</div></div><div class="hcard-body"><div class="hcard-date">DEC 22–24, 2026</div><h3>Technoholix</h3><p>International EDM, 360° concerts and fire performances after dark.</p><a class="hcard-link" href="#contact">Get Pass</a></div></div>
+  </div>
+</div></section>
+
+<!-- TECHNOHOLIX -->
+<section id="tech">
+  <div class="tc">
+    <p class="eyb c">System.load(night_events)</p>
+    <h2 class="st"><em>TECHNO</em>HOLIX</h2>
+    <p>Three nights of pure adrenaline. International EDM artists, 360° concerts, fire performances and global street artists take over IIT Bombay after dark.</p>
+    <div class="chips">
+      <span class="chip">EDM Night</span><span class="chip">DJ Marnik</span>
+      <span class="chip">Matisse & Sadko</span><span class="chip">360° Concert</span>
+      <span class="chip">Ozone Art</span><span class="chip">Fire Performers</span>
+    </div>
+    <a href="#contact" class="btn-r">Get Your Pass</a>
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section id="workshops"><div class="mw">
+  <p class="eyb g">System.load(workshops)</p>
+  <h2 class="st">Hands-On <em style="color:var(--g)">Workshops</em></h2>
+  <p style="color:var(--td);max-width:460px;line-height:1.8;margin-top:.4rem;font-size:.88rem">Industry experts. Real tools. Skills that outlast the festival.</p>
+  <div class="wg">
+    <div class="wi"><span class="wn">01</span><div class="wb"><h4>AI & Machine Learning</h4><p>Google Cloud, AWS, live datasets. From theory to deployment.</p></div></div>
+    <div class="wi"><span class="wn">02</span><div class="wb"><h4>Gesture & Robotics</h4><p>Sensor-based gesture control. Build and drive your own bot.</p></div></div>
+    <div class="wi"><span class="wn">03</span><div class="wb"><h4>Ethical Hacking</h4><p>Penetration testing, CTF challenges, real-world assessments.</p></div></div>
+    <div class="wi"><span class="wn">04</span><div class="wb"><h4>Blockchain & Web 3.0</h4><p>Ethereum dApps, smart contracts, NFTs and DeFi fundamentals.</p></div></div>
+    <div class="wi"><span class="wn">05</span><div class="wb"><h4>Drone Technology</h4><p>Assemble and fly a quadcopter. ESCs, flight controllers, FPV.</p></div></div>
+    <div class="wi"><span class="wn">06</span><div class="wb"><h4>Algo Trading & Crypto</h4><p>Python HFT strategies, market analysis, risk management.</p></div></div>
+  </div>
+</div></section>
+
+<!-- GALLERY -->
+<section id="gallery"><div class="mw">
+  <p class="eyb">System.load(gallery)</p>
+  <h2 class="st">War <em>Archive</em></h2>
+  <div class="gg">
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt=""><div class="gover"><span>ROBOWARS 2025</span></div></div>
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt=""><div class="gover"><span>EXHIBITIONS</span></div></div>
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=400&q=80" alt=""><div class="gover"><span>TECHNOHOLIX</span></div></div>
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt=""><div class="gover"><span>HACKATHON</span></div></div>
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80" alt=""><div class="gover"><span>KEYNOTES</span></div></div>
+    <div class="gi"><img class="gimg" src="https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=500&q=80" alt=""><div class="gover"><span>WORKSHOPS</span></div></div>
+  </div>
+</div></section>
+
+<!-- SPONSORS -->
+<section id="sponsors"><div class="mw">
+  <div style="text-align:center;margin-bottom:3rem"><p class="eyb c">System.load(sponsors)</p><h2 class="st">Powered <em>By</em></h2></div>
+  <div class="sp-tier"><div class="sp-label">Title Sponsor</div><div class="sp-logos"><div class="sp-logo" style="font-size:1.2rem;color:var(--g);border-color:rgba(200,148,26,.3)">TATA CONSULTANCY</div></div></div>
+  <div class="sp-tier"><div class="sp-label">Gold Sponsors</div><div class="sp-logos"><div class="sp-logo">GOOGLE</div><div class="sp-logo">MICROSOFT</div><div class="sp-logo">NVIDIA</div></div></div>
+  <div class="sp-tier"><div class="sp-label">Silver Sponsors</div><div class="sp-logos"><div class="sp-logo">ISRO</div><div class="sp-logo">INTEL</div><div class="sp-logo">DRDO</div><div class="sp-logo">QUALCOMM</div></div></div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="faq-w">
+  <div class="faq-h"><p class="eyb c">System.load(faq)</p><h2 class="st">Frequently <em>Asked</em></h2></div>
+  <div class="faq-item"><div class="faq-q">Who can participate in Techfest 2026?<div class="faq-ico"></div></div><div class="faq-a"><p>Techfest is open to students from all colleges and universities worldwide. Professionals can attend as visitors. Individual and team registrations are available based on event type.</p></div></div>
+  <div class="faq-item"><div class="faq-q">When and where is Techfest 2026?<div class="faq-ico"></div></div><div class="faq-a"><p>Techfest 2026 will be held December 22–24, 2026 at IIT Bombay, Powai, Mumbai. Accommodation options are available near campus for outstation participants.</p></div></div>
+  <div class="faq-item"><div class="faq-q">How do I register for competitions?<div class="faq-ico"></div></div><div class="faq-a"><p>Visit techfest.org/register, create an account, and select competitions or workshops. Team registrations can be done from the team section after signing up.</p></div></div>
+  <div class="faq-item"><div class="faq-q">Are workshops included in the festival pass?<div class="faq-ico"></div></div><div class="faq-a"><p>Workshops require separate registration with individual fees. The general festival pass gives access to exhibitions, keynotes and Technoholix performances.</p></div></div>
+  <div class="faq-item"><div class="faq-q">What is the total prize pool?<div class="faq-ico"></div></div><div class="faq-a"><p>Techfest offers over ₹1 Crore in total prize money across all competitions. Individual events like Robowars and Hackathons carry substantial individual prizes.</p></div></div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact"><div class="mw">
+  <div class="cg">
+    <div class="cinfo">
+      <p class="eyb">System.init(contact)</p>
+      <h2>Get In Touch</h2>
+      <p>Registration, sponsorship or partnership queries — our team responds within 24 hours.</p>
+      <div class="crow"><div class="cic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span>IIT Bombay, Powai, Mumbai — 400076</span></div>
+      <div class="crow"><div class="cic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span>info@techfest.org</span></div>
+      <div class="crow"><div class="cic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 16.5z"/></svg></div><span>+91 22 2576 4000</span></div>
+    </div>
+    <div class="cf">
+      <div class="fr"><div class="fg"><label>Name</label><input type="text" placeholder="Your full name"></div><div class="fg"><label>Email</label><input type="email" placeholder="you@college.edu"></div></div>
+      <div class="fg"><label>College / Organization</label><input type="text" placeholder="IIT Bombay"></div>
+      <div class="fg"><label>Message</label><textarea rows="4" placeholder="Your query..."></textarea></div>
+      <button class="btn-r" style="border:none;cursor:none;width:fit-content">TRANSMIT MESSAGE</button>
+    </div>
+  </div>
+  <div class="fbar">
+    <p>© 2026 <span>TECHFEST</span> IIT BOMBAY · Upgrade. Innovate. Dominate.</p>
+    <div class="soc"><a href="#">FB</a><a href="#">TW</a><a href="#">IG</a><a href="#">YT</a><a href="#">LI</a></div>
+  </div>
+</div></section>
+
+<script>
+const CU=document.getElementById('CU'),CUR=document.getElementById('CUR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;CU.style.left=mx+'px';CU.style.top=my+'px'});
+(function lr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;CUR.style.left=rx+'px';CUR.style.top=ry+'px';requestAnimationFrame(lr)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{CU.style.width='4px';CU.style.height='4px';CUR.style.width='46px';CUR.style.height='46px';CUR.style.borderColor='var(--r)'});
+  el.addEventListener('mouseleave',()=>{CU.style.width='8px';CU.style.height='8px';CUR.style.width='32px';CUR.style.height='32px';CUR.style.borderColor='rgba(200,148,26,.6)'});
+});
+setTimeout(()=>{
+  const i=document.getElementById('intro');
+  i.style.transition='opacity .9s ease';i.style.opacity='0';
+  setTimeout(()=>{i.style.display='none';document.getElementById('nav').classList.add('on')},900);
+},3200);
+const hc=document.getElementById('hcanv'),hx=hc.getContext('2d');
+function rHC(){hc.width=hc.offsetWidth;hc.height=hc.offsetHeight}rHC();window.addEventListener('resize',rHC);
+class CL{
+  constructor(){this.rst()}
+  rst(){
+    const s=Math.floor(Math.random()*4);
+    if(s===0){this.x=Math.random()*hc.width;this.y=0}
+    else if(s===1){this.x=hc.width;this.y=Math.random()*hc.height}
+    else if(s===2){this.x=Math.random()*hc.width;this.y=hc.height}
+    else{this.x=0;this.y=Math.random()*hc.height}
+    this.segs=[];let cx=this.x,cy=this.y;
+    for(let i=0;i<3+Math.floor(Math.random()*4);i++){
+      const a=Math.floor(Math.random()*4)*(Math.PI/2)+Math.random()*.08-.04;
+      const l=30+Math.random()*100;
+      const nx=cx+Math.cos(a)*l,ny=cy+Math.sin(a)*l;
+      this.segs.push({x1:cx,y1:cy,x2:nx,y2:ny});cx=nx;cy=ny;
+    }
+    this.p=Math.random();this.sp=.002+Math.random()*.004;
+    this.col=Math.random()<.65?'rgba(200,0,26,':'rgba(200,148,26,';
+    this.a=.1+Math.random()*.18;
+    this.tl=this.segs.reduce((a,s)=>a+Math.hypot(s.x2-s.x1,s.y2-s.y1),0);
+  }
+  upd(){this.p=Math.min(1,this.p+this.sp);if(this.p>=1)this.rst()}
+  drw(){
+    let d=0;const tot=this.tl*this.p;
+    hx.strokeStyle=this.col+this.a+')';hx.lineWidth=.7;
+    for(const s of this.segs){
+      const sl=Math.hypot(s.x2-s.x1,s.y2-s.y1);if(d>=tot)break;
+      const dl=Math.min(sl,tot-d),t=dl/sl;
+      hx.beginPath();hx.moveTo(s.x1,s.y1);hx.lineTo(s.x1+(s.x2-s.x1)*t,s.y1+(s.y2-s.y1)*t);hx.stroke();
+      if(d+sl>tot){
+        const px=s.x1+(s.x2-s.x1)*t,py=s.y1+(s.y2-s.y1)*t;
+        hx.beginPath();hx.arc(px,py,2.5,0,Math.PI*2);hx.fillStyle=this.col+'.85)';hx.fill();
+        const g=hx.createRadialGradient(px,py,0,px,py,10);g.addColorStop(0,this.col+'.3)');g.addColorStop(1,'transparent');
+        hx.beginPath();hx.arc(px,py,10,0,Math.PI*2);hx.fillStyle=g;hx.fill();
+      }
+      d+=sl;
+    }
+  }
+}
+const cls=Array.from({length:28},()=>new CL());
+function dHUD(){
+  const w=hc.width,h=hc.height,s=55;
+  hx.strokeStyle='rgba(200,0,26,.22)';hx.lineWidth=1.5;
+  hx.beginPath();hx.moveTo(s,18);hx.lineTo(18,18);hx.lineTo(18,s);hx.stroke();
+  hx.beginPath();hx.moveTo(w-s,18);hx.lineTo(w-18,18);hx.lineTo(w-18,s);hx.stroke();
+  hx.beginPath();hx.moveTo(s,h-18);hx.lineTo(18,h-18);hx.lineTo(18,h-s);hx.stroke();
+  hx.beginPath();hx.moveTo(w-s,h-18);hx.lineTo(w-18,h-18);hx.lineTo(w-18,h-s);hx.stroke();
+  const cx=w/2,cy=h/2;hx.strokeStyle='rgba(200,148,26,.13)';hx.lineWidth=.8;
+  hx.beginPath();hx.arc(cx,cy,5,0,Math.PI*2);hx.stroke();
+  hx.beginPath();hx.moveTo(cx-14,cy);hx.lineTo(cx+14,cy);hx.stroke();
+  hx.beginPath();hx.moveTo(cx,cy-14);hx.lineTo(cx,cy+14);hx.stroke();
+}
+function aH(){
+  hx.clearRect(0,0,hc.width,hc.height);
+  hx.strokeStyle='rgba(200,0,26,.022)';hx.lineWidth=.5;
+  for(let x=0;x<hc.width;x+=80){hx.beginPath();hx.moveTo(x,0);hx.lineTo(x,hc.height);hx.stroke()}
+  for(let y=0;y<hc.height;y+=80){hx.beginPath();hx.moveTo(0,y);hx.lineTo(hc.width,y);hx.stroke()}
+  cls.forEach(l=>{l.upd();l.drw()});dHUD();requestAnimationFrame(aH);
+}aH();
+const sc=document.getElementById('sc2'),sx=sc.getContext('2d');let sf=0;
+function aS(){
+  sx.clearRect(0,0,320,360);const cx=160,cy=182,t=sf*.012;
+  sx.strokeStyle='rgba(200,0,26,.28)';sx.lineWidth=1;sx.beginPath();
+  for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/2;i===0?sx.moveTo(cx+Math.cos(a)*138,cy+Math.sin(a)*138):sx.lineTo(cx+Math.cos(a)*138,cy+Math.sin(a)*138)}
+  sx.closePath();sx.stroke();
+  [[110,.22],[82,.33],[54,.5]].forEach(([r,a])=>{sx.strokeStyle='rgba(200,0,26,'+a+')';sx.lineWidth=.75;sx.beginPath();sx.arc(cx,cy,r,0,Math.PI*2);sx.stroke()});
+  for(let i=0;i<48;i++){const a=Math.PI*2/48*i+t,r1=114,r2=i%4===0?128:i%2===0?122:118;sx.strokeStyle=i%4===0?'rgba(200,148,26,.68)':i%2===0?'rgba(200,0,26,.36)':'rgba(200,0,26,.16)';sx.lineWidth=i%4===0?1.5:.65;sx.beginPath();sx.moveTo(cx+Math.cos(a)*r1,cy+Math.sin(a)*r1);sx.lineTo(cx+Math.cos(a)*r2,cy+Math.sin(a)*r2);sx.stroke()}
+  sx.strokeStyle='rgba(200,148,26,.16)';sx.lineWidth=.75;
+  [0,Math.PI/3,Math.PI*2/3,Math.PI,Math.PI*4/3,Math.PI*5/3].forEach(o=>{const a=o-t*.55;sx.beginPath();sx.arc(cx+Math.cos(a)*55,cy+Math.sin(a)*55,10,0,Math.PI*2);sx.stroke()});
+  for(let i=0;i<6;i++){const a=Math.PI/3*i+t*.2;sx.strokeStyle='rgba(200,0,26,.06)';sx.lineWidth=.55;sx.beginPath();sx.moveTo(cx,cy);sx.lineTo(cx+Math.cos(a)*138,cy+Math.sin(a)*138);sx.stroke()}
+  const cg=sx.createRadialGradient(cx,cy,0,cx,cy,44);cg.addColorStop(0,'rgba(200,0,26,.62)');cg.addColorStop(.4,'rgba(200,148,26,.26)');cg.addColorStop(1,'transparent');
+  sx.beginPath();sx.arc(cx,cy,44,0,Math.PI*2);sx.fillStyle=cg;sx.fill();
+  sx.strokeStyle='rgba(200,0,26,.85)';sx.lineWidth=1.8;sx.beginPath();sx.arc(cx,cy,19,0,Math.PI*2);sx.stroke();
+  sx.beginPath();sx.arc(cx,cy,8,0,Math.PI*2);sx.fillStyle='rgba(200,0,26,.92)';sx.fill();
+  sx.font="10px 'Share Tech Mono'";
+  sx.fillStyle='rgba(200,148,26,.48)';sx.fillText('PWR: '+(88+Math.sin(t)*8).toFixed(1)+'%',16,22);sx.fillText('SYS: ONLINE',16,36);
+  sx.fillStyle='rgba(200,0,26,.48)';sx.fillText('TF-2026',228,22);sx.fillText('IIT-B',243,36);
+  sf++;requestAnimationFrame(aS);
+}aS();
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement,was=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!was)item.classList.add('open');
+  });
+});
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),+(e.target.dataset.d||0));obs.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.ec,.wi,.hcard,.gi').forEach((el,i)=>{el.dataset.d=(i%3)*110;obs.observe(el)});
+</script>
+</body>
+</html>
